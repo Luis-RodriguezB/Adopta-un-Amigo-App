@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import ExampleReducer from "./ExampleReducer";
+import DogsReducer from "./DogsReducer";
 
 export default combineReducers({
-  example: ExampleReducer,
+  dogsState: DogsReducer,
 });

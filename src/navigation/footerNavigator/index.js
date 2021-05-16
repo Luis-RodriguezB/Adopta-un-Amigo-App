@@ -1,14 +1,14 @@
 import React from "react";
-import Route from "../constants/Routes";
-import HomeScreen from "../view/screen/homeScreen";
-import DogsScreen from "../view/screen/dogScreen";
-import ActivitiesScreen from "../view/screen/activityScreen";
+import Route from "../../constants/Routes";
+import HomeScreen from "../../view/screen/homeScreen";
+import DogsScreen from "../../view/screen/dogScreen";
+import ActivitiesScreen from "../../view/screen/activityScreen";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const { Navigator, Screen } = createMaterialBottomTabNavigator();
 
-const AppNavigator = () => {
+const FooterNavigator = () => {
   return (
     <Navigator
       initialRouteName={Route.Home}
@@ -49,4 +49,4 @@ const AppNavigator = () => {
   );
 };
 
-export default AppNavigator;
+export default FooterNavigator;
