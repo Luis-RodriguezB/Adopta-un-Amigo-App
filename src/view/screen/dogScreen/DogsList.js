@@ -1,12 +1,13 @@
 import React from "react";
 import { Button } from "native-base";
 import { Image, StyleSheet, View, Text } from "react-native";
+import Routes from '../../../constants/Routes';
 
-const DogCard = ({ data }) => {
+const DogList = ({ data, navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <Text style={styles.tittle}>Perros en adopción</Text>
-      {data.map(({ name, race, age, img }, index) => {
+      {data.map(({id, name, race, age, img }, index) => {
         return (
           <View style={styles.container} key={index}>
             <View style={styles.cardContentImg}>
@@ -28,6 +29,7 @@ const DogCard = ({ data }) => {
                     marginTop: 25,
                     marginRight: 5,
                   }}
+                  onPress={() => navigation.navigate('IndividualDog', { dogId: id })}
                 >
                   <Text>Ver más...</Text>
                 </Button>
@@ -40,7 +42,7 @@ const DogCard = ({ data }) => {
   );
 };
 
-export default DogCard;
+export default DogList;
 
 const styles = StyleSheet.create({
   container: {

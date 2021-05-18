@@ -1,7 +1,8 @@
 import React from "react";
 import { Text, View } from "native-base";
 
-const Activities = () => {
+const Activities = ({route}) => {
+  console.log(route)
   return (
     <View
       style={{

@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View } from "native-base";
 
-const FormDog = () => {
+const FormAdoptionDog = () => {
   return (
     <View
       style={{
@@ -15,4 +15,4 @@ const FormDog = () => {
   );
 };
 
-export default FormDog;
+export default FormAdoptionDog;

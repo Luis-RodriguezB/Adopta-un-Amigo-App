@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import DogCard from "./DogsList";
+import DogList from "./DogsList";
 import { GetDogs } from "../../../redux/actions/dogsActions";
 import Spinner from "../../layout/spinner";
 
-const Dogs = () => {
+const Dogs = ({navigation}) => {
   const dispatch = useDispatch();
   const { dogsState } = useSelector((state) => state);
 
@@ -19,7 +19,7 @@ const Dogs = () => {
         <Spinner />
       ) : (
         <ScrollView contentContainerStyle={{ flex: 1 }}>
-          <DogCard data={dogsState.dogs} />
+          <DogList navigation={navigation} data={dogsState.dogs} />
         </ScrollView>
       )}
     </View>

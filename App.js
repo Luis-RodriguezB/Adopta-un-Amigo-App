@@ -3,8 +3,7 @@ import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { View } from "react-native";
 import store from "./src/redux/store/store";
-import FooterNavigator from "./src/navigation/footerNavigator";
-import StackNavigator from "./src/navigation/StackNavigator";
+import {FooterNavigator} from "./src/navigation";
 
 const App = () => {
   return (

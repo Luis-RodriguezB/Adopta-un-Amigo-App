@@ -1,9 +1,10 @@
 const Route = {
     Home: 'Home',
     Dogs: 'Dogs', 
+    DogsList: 'DogsList', 
     IndividualDog: 'IndividualDog',
     Activities: 'Activities',
-    FormDog: 'FormDog'
+    FormAdoptionDog: 'FormAdoptionDog'
 }
 
 export default Route;

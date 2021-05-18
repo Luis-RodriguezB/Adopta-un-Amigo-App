@@ -11,7 +11,6 @@ import information from "./components/information";
 import Contact from "./components/contacts";
 
 const Home = () => {
-  console.log(information);
   return (
       <ScrollView contentContainerStyle={{flex:1}}>
         <View style={{ flex: 3, margin: 0 }}>
