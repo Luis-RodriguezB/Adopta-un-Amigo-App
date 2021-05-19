@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "native-base";
 import { Image, StyleSheet, View, Text } from "react-native";
-import Routes from '../../../constants/Routes';
 
 const DogList = ({ data, navigation }) => {
   return (

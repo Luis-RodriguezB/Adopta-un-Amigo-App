@@ -10,7 +10,7 @@ const FormAdoptionDog = () => {
         alignItems: "center",
       }}
     >
-      <Text>Hello, world!</Text>
+      <Text>Adopcion</Text>
     </View>
   );
 };
