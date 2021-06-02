@@ -12,7 +12,8 @@ import Contact from "./components/contacts";
 
 const Home = () => {
   return (
-      <ScrollView contentContainerStyle={{flex:1}}>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={style.container} >
         <View style={{ flex: 3, margin: 0 }}>
           <ImageBackground source={perritos} style={style.image}>
             <Text style={style.tittle}>Adopta un amigo</Text>
@@ -39,7 +40,8 @@ const Home = () => {
             );
           })}
         </View>
-      </ScrollView>
+      </View>
+    </ScrollView>
   );
 };
 const style = StyleSheet.create({
@@ -56,8 +58,8 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFF",
   },
-  textContainer: { padding: 10, flex: 1 },
-  text: { fontSize: 16, margin: 5 },
+  textContainer: { padding: 10, flex: 2 },
+  text: { fontSize: 16, marginBottom: 15, marginHorizontal: 5 },
 });
 
 export default Home;

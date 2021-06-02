@@ -1,43 +1,47 @@
 import React from "react";
-import { Button } from "native-base";
-import { Image, StyleSheet, View, Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 const DogList = ({ data, navigation }) => {
   return (
-    <View style={{ flex: 1 }}>
-      <Text style={styles.tittle}>Perros en adopción</Text>
-      {data.map(({id, name, race, age, img }, index) => {
-        return (
-          <View style={styles.container} key={index}>
-            <View style={styles.cardContentImg}>
-              <Image source={{ uri: img }} style={styles.image} />
-            </View>
-            <View style={styles.cardContent}>
-              <View style={styles.contentText}>
-                <Text style={styles.text}>Nombre: {name}</Text>
-                <Text style={styles.text}>Raza: {race}</Text>
-                <Text style={styles.text}>Edad: {age}</Text>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.tittle}>Perros en adopción</Text>
+        {data.map(({ id, name, race, age, img }, index) => {
+          return (
+            <View style={styles.container} key={index}>
+              <View style={styles.cardContentImg}>
+                <Image source={{ uri: img }} style={styles.image} />
               </View>
-              <View style={styles.contentButton}>
-                <Button
-                  transparent
-                  textStyle={{ color: "#87838B" }}
-                  style={{
-                    padding: 0,
-                    maring: 0,
-                    marginTop: 25,
-                    marginRight: 5,
-                  }}
-                  onPress={() => navigation.navigate('IndividualDog', { dogId: id })}
-                >
-                  <Text>Ver más...</Text>
-                </Button>
+              <View style={styles.cardContent}>
+                <View style={styles.contentText}>
+                  <Text style={styles.text}>Nombre: {name}</Text>
+                  <Text style={styles.text}>Raza: {race}</Text>
+                  <Text style={styles.text}>Edad: {age}</Text>
+                </View>
+                <View style={styles.contentButton}>
+                  <TouchableOpacity
+                    textStyle={{ color: "#87838B" }}
+                    style={styles.button}
+                    onPress={() =>
+                      navigation.navigate("IndividualDog", { dogId: id })
+                    }
+                  >
+                    <Text>Ver más...</Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
-        );
-      })}
-    </View>
+          );
+        })}
+      </View>
+    </ScrollView>
   );
 };
 
@@ -89,5 +93,12 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontSize: 18,
     fontWeight: "700",
+  },
+  button: {
+    padding: 0,
+    margin: 0,
+    marginTop: 25,
+    top: 20,
+    marginRight: 5,
   },
 });

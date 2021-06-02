@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { GetDogById } from "../../../redux/actions/dogsActions";
 import { CreateAdoptionAction } from "../../../redux/actions/adoptionAction";
@@ -52,6 +53,19 @@ const FormAdoptionDog = ({ navigation, route }) => {
 
   const handleAdoptionSubmit = () => {
     dispatch(CreateAdoptionAction(adoption));
+
+    Alert.alert(
+      "Solicitud Enviada",
+      "Gracias por tu solicitud, nos contactaremos contigo lo más pronto posible.",
+      [
+        {
+          text: "Ok",
+          onPress: () => navigation.popToTop(),
+          style: "cancel",
+        },
+      ]
+    );
+
     setAdoption({
       name: "",
       lastName: "",
@@ -66,15 +80,17 @@ const FormAdoptionDog = ({ navigation, route }) => {
   const { name, lastName, telephone, email, direction, description } = adoption;
 
   return (
-    <ScrollView contentContainerStyle={{ flex: 1 }}>
-      <Text style={styles.header}>Formulario de Adopción</Text>
-      <View style={styles.subtittle}>
-        <Text>
-          Para continuar con el proceso de adopción, debes llenar el formulario
-        </Text>
-      </View>
-      <View style={styles.tittle}>
-        <View>
+    <ScrollView
+      contentContainerStyle={{ flexGrow: 1, backgroundColor: "white" }}
+    >
+      <View style={styles.form}>
+        <View style={{flex: 2}}>
+          <Text style={styles.header}>Formulario de Adopción</Text>
+          <Text style={styles.subtittle}>
+            Para continuar con el proceso de adopción, debes llenar el
+            formulario
+          </Text>
+
           <Text>Nombre</Text>
           <TextInput
             style={styles.input}
@@ -100,6 +116,8 @@ const FormAdoptionDog = ({ navigation, route }) => {
             style={styles.input}
             id="telephone"
             name="telephone"
+            keyboardType="numeric"
+            maxLength={8}
             value={telephone}
             placeholder="Escribe tu teléfono"
             onChangeText={handleChange("telephone")}
@@ -121,6 +139,8 @@ const FormAdoptionDog = ({ navigation, route }) => {
             id="direction"
             name="direction"
             value={direction}
+            multiline={true}
+            numberOfLines={3}
             placeholder="Escribe tu dirección"
             onChangeText={handleChange("direction")}
           />
@@ -131,6 +151,8 @@ const FormAdoptionDog = ({ navigation, route }) => {
             id="description"
             name="description"
             value={description}
+            multiline={true}
+            numberOfLines={5}
             placeholder="Escribe una breve descripción"
             onChangeText={handleChange("description")}
           />
@@ -140,7 +162,7 @@ const FormAdoptionDog = ({ navigation, route }) => {
             style={styles.button}
             onPress={handleAdoptionSubmit}
           >
-            <Text style={styles.textButton}>Adoptar</Text>
+            <Text style={styles.textButton}>Enviar solicitud</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -159,13 +181,17 @@ const styles = StyleSheet.create({
   },
   input: {
     borderColor: "lightgrey",
-    margin: 10,
+    marginTop: 5,
+    marginBottom: 15,
     height: 50,
-    paddingLeft: 10,
+    paddingLeft: 5,
+    textAlign: "left",
+    alignItems: "center",
     borderWidth: 1,
   },
   containerButton: {
     flex: 1,
+    marginVertical: 15,
     justifyContent: "center",
     alignItems: "center",
     alignContent: "center",
@@ -177,9 +203,8 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   subtittle: {
-    margin: 15,
-    textAlign: "left",
-    fontSize: 18,
+    fontSize: 14,
+    marginBottom: 20,
   },
   button: {
     backgroundColor: "#00D27A",
@@ -190,5 +215,11 @@ const styles = StyleSheet.create({
   textButton: {
     color: "#FFF",
     fontSize: 16,
+  },
+  form: {
+    flex: 1,
+    padding: 20,
+    marginVertical: 5,
+    marginHorizontal: 10,
   },
 });

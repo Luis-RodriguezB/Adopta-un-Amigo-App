@@ -8,4 +8,12 @@ export default [
     name: "Visión",
     description: "Mejorar la vida diaria de muchas personas y animalitos.",
   },
+  {
+    name: "Correo", 
+    description: "adoptaUnAmigo@gmail.com"
+  },
+  {
+    name: "Teléfono",
+    description: "87675423"
+  }
 ];
