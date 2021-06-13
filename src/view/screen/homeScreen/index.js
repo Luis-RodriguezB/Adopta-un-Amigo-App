@@ -13,20 +13,12 @@ import Contact from "./components/contacts";
 const Home = () => {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={style.container} >
+      <View style={style.container}>
         <View style={{ flex: 3, margin: 0 }}>
           <ImageBackground source={perritos} style={style.image}>
             <Text style={style.tittle}>Adopta un amigo</Text>
           </ImageBackground>
-          <Text
-            style={{
-              margin: 5,
-              paddingRight: 10,
-              paddingLeft: 10,
-              paddingTop: 10,
-              fontSize: 16,
-            }}
-          >
+          <Text style={style.textResume}>
             Somos una organización sin fines de lucro que buscar rescatar y
             darles un hogar a los perros de la calle en la zona de Liberia.
           </Text>
@@ -45,7 +37,7 @@ const Home = () => {
   );
 };
 const style = StyleSheet.create({
-  container: { flex: 1, margin: 0 },
+  container: { flexGrow: 1, margin: 0 },
   image: {
     flex: 1,
     resizeMode: "stretch",
@@ -58,7 +50,14 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFF",
   },
-  textContainer: { padding: 10, flex: 2 },
+  textResume: {
+    margin: 5,
+    paddingRight: 10,
+    paddingLeft: 10,
+    paddingTop: 10,
+    fontSize: 16,
+  },
+  textContainer: { padding: 10, flexShrink: 2 },
   text: { fontSize: 16, marginBottom: 15, marginHorizontal: 5 },
 });
 

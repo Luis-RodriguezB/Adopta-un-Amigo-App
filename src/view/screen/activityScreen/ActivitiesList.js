@@ -1,10 +1,9 @@
 import React from "react";
 import moment from "moment";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 const ActivitiesList = ({ data }) => {
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={{ flex: 1 }}>
         <Text style={styles.tittle}>Actividades</Text>
         {data.map(({ name, activityDate, direction, description }, index) => {
@@ -27,7 +26,6 @@ const ActivitiesList = ({ data }) => {
           );
         })}
       </View>
-    </ScrollView>
   );
 };
 
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentText: {
-    flex: 2,
+    flexShrink: 2,
     justifyContent: "space-between",
     alignContent: 'center'
   },

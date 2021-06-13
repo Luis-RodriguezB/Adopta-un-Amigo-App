@@ -4,13 +4,11 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView,
   TouchableOpacity,
 } from "react-native";
 
 const DogList = ({ data, navigation }) => {
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={{ flex: 1 }}>
         <Text style={styles.tittle}>Perros en adopción</Text>
         {data.map(({ id, name, race, age, img }, index) => {
@@ -41,7 +39,6 @@ const DogList = ({ data, navigation }) => {
           );
         })}
       </View>
-    </ScrollView>
   );
 };
 

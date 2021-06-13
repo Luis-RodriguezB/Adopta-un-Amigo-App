@@ -18,7 +18,7 @@ const Dogs = ({navigation}) => {
       {dogsState.loading ? (
         <Spinner />
       ) : (
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <DogList navigation={navigation} data={dogsState.dogs} />
         </ScrollView>
       )}
