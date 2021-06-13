@@ -31,27 +31,23 @@ const Activities = ({ route, navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-      <View style={{ flex: 1 }}>
-        <View style={styles.imageContainer}>
-          <Image source={{ uri: img }} style={styles.image} />
-        </View>
-        <View style={styles.container}>
-          <Text style={styles.text}>Nombre: {name}</Text>
-          <Text style={styles.text}>Raza: {race}</Text>
-          <Text style={styles.text}>Color: {color}</Text>
-          <Text style={styles.text}>Edad: {age}</Text>
-          <Text style={styles.text}>Descripción: {description}</Text>
-          <View style={styles.containerButton}>
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() =>
-                navigation.navigate("FormAdoptionDog", { dogId: id })
-              }
-            >
-              <Text style={styles.textButton}>Adoptar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+      <View style={styles.imageContainer}>
+        <Image source={{ uri: img }} style={styles.image} />
+      </View>
+      <View style={styles.container}>
+        <Text style={styles.text}>Nombre: {name}</Text>
+        <Text style={styles.text}>Raza: {race}</Text>
+        <Text style={styles.text}>Color: {color}</Text>
+        <Text style={styles.text}>Edad: {age}</Text>
+        <Text style={styles.text}>Descripción: {description}</Text>
+      </View>
+      <View style={styles.containerButton}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("FormAdoptionDog", { dogId: id })}
+        >
+          <Text style={styles.textButton}>Adoptar</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -88,6 +84,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 15,
     borderRadius: 2,
+    marginTop: 50
   },
   textButton: {
     color: "#FFF",
