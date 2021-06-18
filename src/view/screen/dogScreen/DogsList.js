@@ -5,40 +5,48 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
+import AlternativeContent from "../../alternativeContentScreen";
 
 const DogList = ({ data, navigation }) => {
   return (
-      <View style={{ flex: 1 }}>
-        <Text style={styles.tittle}>Perros en adopción</Text>
-        {data.map(({ id, name, race, age, img }, index) => {
-          return (
-            <View style={styles.container} key={index}>
-              <View style={styles.cardContentImg}>
-                <Image source={{ uri: img }} style={styles.image} />
-              </View>
-              <View style={styles.cardContent}>
-                <View style={styles.contentText}>
-                  <Text style={styles.text}>Nombre: {name}</Text>
-                  <Text style={styles.text}>Raza: {race}</Text>
-                  <Text style={styles.text}>Edad: {age}</Text>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      {data.length === 0 ? (
+        <AlternativeContent message="En este momento no hay perros en adopción...." />
+      ) : (
+        <View style={{ flex: 1 }}>
+          <Text style={styles.tittle}>Perros en adopción</Text>
+          {data.map(({ id, name, race, age, image }, index) => {
+            return (
+              <View style={styles.container} key={index}>
+                <View style={styles.cardContentImg}>
+                  <Image source={{uri: image}} style={styles.image} />
                 </View>
-                <View style={styles.contentButton}>
-                  <TouchableOpacity
-                    textStyle={{ color: "#87838B" }}
-                    style={styles.button}
-                    onPress={() =>
-                      navigation.navigate("IndividualDog", { dogId: id })
-                    }
-                  >
-                    <Text>Ver más...</Text>
-                  </TouchableOpacity>
+                <View style={styles.cardContent}>
+                  <View style={styles.contentText}>
+                    <Text style={styles.text}>Nombre: {name}</Text>
+                    <Text style={styles.text}>Raza: {race}</Text>
+                    <Text style={styles.text}>Edad: {age}</Text>
+                  </View>
+                  <View style={styles.contentButton}>
+                    <TouchableOpacity
+                      textStyle={{ color: "#87838B" }}
+                      style={styles.button}
+                      onPress={() =>
+                        navigation.navigate("IndividualDog", { dogId: id })
+                      }
+                    >
+                      <Text>Ver más...</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
-            </View>
-          );
-        })}
-      </View>
+            );
+          })}
+        </View>
+      )}
+    </ScrollView>
   );
 };
 

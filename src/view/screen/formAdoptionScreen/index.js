@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   View,
   StyleSheet,
@@ -9,26 +9,19 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { GetDogById } from "../../../redux/actions/dogsActions";
 import { CreateAdoptionAction } from "../../../redux/actions/adoptionAction";
+import useDogsEffectById from "../../hooks/useDogsEffectById";
+import { emptyField, validateEmail } from '../../helper/formValidate';
 
 const FormAdoptionDog = ({ navigation, route }) => {
   const {
     params: { dogId },
   } = route;
-
-  const [dog, setDog] = useState({});
   const dispatch = useDispatch();
-  const { dogsState } = useSelector((state) => state);
-
-  useEffect(() => {
-    if (dogsState.dogs.length === 0) {
-      dispatch(GetDogById(dogId));
-    } else {
-      const [dogById] = dogsState.dogs.filter((item) => item.id === dogId);
-      setDog({ ...dogById });
-    }
-  }, [dogsState.dogs, dogId, dispatch]);
+  const { dog } = useDogsEffectById(dogId);
+  const [error, setError] = useState(false);
+  const [emailError, setEmailError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [adoption, setAdoption] = useState({
     name: "",
@@ -52,6 +45,18 @@ const FormAdoptionDog = ({ navigation, route }) => {
   }, [dog]);
 
   const handleAdoptionSubmit = () => {
+
+    if (emptyField(adoption)) {
+      setErrorMessage("Todos los campos son obligatorios");
+      setError(true);
+      return;
+    }
+
+    if (validateEmail(adoption.email)) {
+      setErrorMessage("Debe de ser un email válido");
+      setEmailError(true);
+      return;
+    }
     dispatch(CreateAdoptionAction(adoption));
 
     Alert.alert(
@@ -77,6 +82,13 @@ const FormAdoptionDog = ({ navigation, route }) => {
     });
   };
 
+  if (error || emailError) {
+    setTimeout(() => {
+      setEmailError(false);
+      setError(false);
+    }, 5000);
+  }
+
   const { name, lastName, telephone, email, direction, description } = adoption;
 
   return (
@@ -84,8 +96,8 @@ const FormAdoptionDog = ({ navigation, route }) => {
       contentContainerStyle={{ flexGrow: 1, backgroundColor: "white" }}
     >
       <View style={styles.form}>
-        <View style={{flex: 2}}>
-          <Text style={styles.header}>Formulario de Adopción</Text>
+        <View style={{ flex: 2 }}>
+          <Text style={[styles.header, styles.centerText]}>Formulario de Adopción</Text>
           <Text style={styles.subtittle}>
             Para continuar con el proceso de adopción, debes llenar el
             formulario
@@ -97,6 +109,7 @@ const FormAdoptionDog = ({ navigation, route }) => {
             id="name"
             name="name"
             value={name}
+            maxLength={30}
             placeholder="Escribe tu nombre"
             onChangeText={handleChange("name")}
           />
@@ -107,6 +120,7 @@ const FormAdoptionDog = ({ navigation, route }) => {
             id="lastName"
             name="lastName"
             value={lastName}
+            maxLength={100}
             placeholder="Escribe tus apellidos"
             onChangeText={handleChange("lastName")}
           />
@@ -128,10 +142,13 @@ const FormAdoptionDog = ({ navigation, route }) => {
             style={styles.input}
             is="email"
             name="email"
+            keyboardType="email-address"
             value={email}
+            maxLength={50}
             placeholder="Escribe tu correo eléctronico"
             onChangeText={handleChange("email")}
           />
+          {emailError && <Text style={[styles.textError, styles.marginText]}>{errorMessage}</Text>}
 
           <Text>Dirección</Text>
           <TextInput
@@ -141,6 +158,7 @@ const FormAdoptionDog = ({ navigation, route }) => {
             value={direction}
             multiline={true}
             numberOfLines={3}
+            maxLength={100}
             placeholder="Escribe tu dirección"
             onChangeText={handleChange("direction")}
           />
@@ -153,16 +171,18 @@ const FormAdoptionDog = ({ navigation, route }) => {
             value={description}
             multiline={true}
             numberOfLines={5}
+            maxLength={100}
             placeholder="Escribe una breve descripción"
             onChangeText={handleChange("description")}
           />
         </View>
+        {error && <Text style={[styles.textError, styles.centerText]}>{errorMessage}</Text>}
         <View style={styles.containerButton}>
           <TouchableOpacity
             style={styles.button}
             onPress={handleAdoptionSubmit}
           >
-            <Text style={styles.textButton}>Enviar solicitud</Text>
+            <Text style={[styles.textButton, styles.centerText]}>Enviar solicitud</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -198,7 +218,6 @@ const styles = StyleSheet.create({
   },
   header: {
     margin: 15,
-    textAlign: "center",
     fontSize: 18,
     fontWeight: "700",
   },
@@ -222,4 +241,15 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 10,
   },
+  textError: {
+    color: "red",
+    fontWeight: "bold",
+    fontSize: 14
+  },
+  centerText: {
+    textAlign: "center"
+  },
+  marginText: {
+    marginBottom: 10
+  }
 });

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import {
   Text,
   View,
@@ -8,32 +7,20 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { GetDogById } from "../../../redux/actions/dogsActions";
+import useDogsEffectById from "../../hooks/useDogsEffectById"; 
 
 const Activities = ({ route, navigation }) => {
   const {
     params: { dogId },
   } = route;
-  const [dog, setDog] = useState({});
-  const dispatch = useDispatch();
+  const { dog } = useDogsEffectById(dogId);
 
-  const { dogsState } = useSelector((state) => state);
-  useEffect(() => {
-    if (dogsState.dogs.length === 0) {
-      dispatch(GetDogById(dogId));
-    } else {
-      const [dogById] = dogsState.dogs.filter((item) => item.id === dogId);
-      setDog({ ...dogById });
-    }
-  }, [dogsState.dogs, dogId, dispatch]);
-
-  const { id, name, race, color, age, description, img } = dog;
-
+  const { id, name, race, color, age, description, image } = dog;
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image source={{ uri: img }}  style={styles.image} />
+          <Image source={{ uri: image }}  style={styles.image} />
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Nombre: {name}</Text>

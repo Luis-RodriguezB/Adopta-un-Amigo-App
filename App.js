@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <View style={{ flex: 1, paddingTop: 40 }}>
+        <View style={{ flex: 1, paddingTop: 40}}>
           <FooterNavigator />
         </View>
       </NavigationContainer>

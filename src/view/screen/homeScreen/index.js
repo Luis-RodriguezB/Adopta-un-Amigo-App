@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import perritos from "../../../../assets/imag.jpg";
 import information from "./components/information";
-import Contact from "./components/contacts";
 
 const Home = () => {
   return (

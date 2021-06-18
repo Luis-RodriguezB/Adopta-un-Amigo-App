@@ -1,27 +1,14 @@
-import React, { useEffect } from "react";
-import { ScrollView, View } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { View } from "react-native";
 import ActivitiesList from "./ActivitiesList";
-import { GetActivities } from "../../../redux/actions/activityActions";
 import Spinner from "../../layout/spinner";
+import useActivitiesEffect from "../../hooks/useActivitiesEffect";
 
 const Activities = ({navigation}) => {
-  const dispatch = useDispatch();
-  const { activitiesState } = useSelector((state) => state);
-
-  useEffect(() => {
-    dispatch(GetActivities());
-  }, [dispatch]);
-
+  const { activities, isRequesting } = useActivitiesEffect();
   return (
     <View style={{ flex: 1 }}>
-      {activitiesState.loading ? (
-        <Spinner />
-      ) : (
-        <ScrollView contentContainerStyle={{ flex: 1 }}>
-          <ActivitiesList navigation={navigation} data={activitiesState.activities} />
-        </ScrollView>
-      )}
+      {isRequesting ? <Spinner /> : <ActivitiesList navigation={navigation} data={activities} />}
     </View>
   );
 };
